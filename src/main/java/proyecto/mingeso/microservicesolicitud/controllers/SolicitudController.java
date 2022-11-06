@@ -36,7 +36,8 @@ public class SolicitudController {
         if (solicitudFinal == null) {
             return ResponseEntity.badRequest().build();
         } else {
-            return ResponseEntity.ok(solicitudFinal);
+            SolicitudEntity solicitado = solicitudService.guardarSolicitud(solicitudFinal);
+            return ResponseEntity.ok(solicitado);
         }
     }
 }
