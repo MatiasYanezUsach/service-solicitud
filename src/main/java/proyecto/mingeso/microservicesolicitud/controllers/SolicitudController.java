@@ -2,10 +2,7 @@ package proyecto.mingeso.microservicesolicitud.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import proyecto.mingeso.microservicesolicitud.entities.SolicitudEntity;
 import proyecto.mingeso.microservicesolicitud.repositories.SolicitudRepository;
 import proyecto.mingeso.microservicesolicitud.services.SolicitudService;
@@ -38,6 +35,16 @@ public class SolicitudController {
         } else {
             SolicitudEntity solicitado = solicitudService.guardarSolicitud(solicitudFinal);
             return ResponseEntity.ok(solicitado);
+        }
+    }
+    @GetMapping("/byRut/{rut_dado}")
+    public ResponseEntity<ArrayList<SolicitudEntity>> obtenerSolicitudes(@PathVariable("rut_dado") String rut_dado) {
+        ArrayList<SolicitudEntity> solicitudes = solicitudRepository.findByRut(rut_dado);
+        if(solicitudes.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        else{
+            return ResponseEntity.ok(solicitudes);
         }
     }
 }
