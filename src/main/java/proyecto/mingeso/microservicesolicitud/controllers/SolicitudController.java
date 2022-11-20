@@ -41,7 +41,7 @@ public class SolicitudController {
     public ResponseEntity<ArrayList<SolicitudEntity>> obtenerSolicitudes(@PathVariable("rut_dado") String rut_dado) {
         ArrayList<SolicitudEntity> solicitudes = solicitudRepository.findByRut(rut_dado);
         if(solicitudes.isEmpty()){
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(solicitudes);
         }
         else{
             return ResponseEntity.ok(solicitudes);
