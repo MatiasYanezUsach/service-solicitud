@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/solicitud")
+@CrossOrigin(origins = "http://localhost:3000")
 public class SolicitudController {
     @Autowired
     SolicitudService solicitudService;
