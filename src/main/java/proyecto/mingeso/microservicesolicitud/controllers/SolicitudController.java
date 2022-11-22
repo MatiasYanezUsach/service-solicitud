@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/solicitud")
-@CrossOrigin(origins = "*")
 public class SolicitudController {
     @Autowired
     SolicitudService solicitudService;
@@ -27,14 +26,17 @@ public class SolicitudController {
         }
         for (int i = 0; i < cantidadSolicitudes; i++) {
             if (solicitudes.get(i).getFecha_cubridora().equals(solicitud.getFecha_cubridora())) {
+                System.out.println ("1");
                 return ResponseEntity.badRequest().build();
             }
         }
         SolicitudEntity solicitudFinal = solicitudService.crearSolicitud(solicitud.getRut_empleado(), solicitud.getFecha_cubridora());
         if (solicitudFinal == null) {
+            System.out.println ("2");
             return ResponseEntity.badRequest().build();
         } else {
             SolicitudEntity solicitado = solicitudService.guardarSolicitud(solicitudFinal);
+            System.out.println ("3");
             return ResponseEntity.ok(solicitado);
         }
     }
